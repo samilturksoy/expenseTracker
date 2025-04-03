@@ -6,7 +6,11 @@
   "editor.insertSpaces": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "never",
-    "source.fixAll.eslint": "never"
+    "source.fixAll.eslint": "never",
+    "source.organizeImports": "always",
+    "source.sortImports": "always",
+    "source.removeUnused.ts": "never",
+    "source.removeUnusedImports": "never"
   },
   "files.eol": "\n",
   "workbench.tree.indent": 16,
