@@ -7,8 +7,8 @@
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "never",
     "source.fixAll.eslint": "never",
-    "source.organizeImports": "always",
-    "source.sortImports": "always",
+    "source.organizeImports": "never",
+    "source.sortImports": "never",
     "source.removeUnused.ts": "never",
     "source.removeUnusedImports": "never"
   },
@@ -16,7 +16,8 @@
   "workbench.tree.indent": 16,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.colorCustomizations": {
-    "tree.indentGuidesStroke": "#05ef3c"
+    "tree.indentGuidesStroke": "#05ef3c",
+    "tree.inactiveIndentGuidesStroke": "#efef05"
   },
   "files.exclude": {
     "**/ios": false,
