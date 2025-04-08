@@ -50,5 +50,6 @@
     "**/os/**": true,
     "**/android/**": true,
     "**/dist/**": true
-  }
+  },
+  "java.compile.nullAnalysis.mode": "automatic"
 }
