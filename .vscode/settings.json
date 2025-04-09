@@ -30,7 +30,7 @@
     ".bundle": true,
     ".yarn": true,
     "**/.eslintrc.**": true,
-    "**/tsconfig.json": true,
+    "**/tsconfig.json": false,
     "react-native.config.js": true,
     "**/babel.config.js": true,
     "**/metro.config.js": true,
