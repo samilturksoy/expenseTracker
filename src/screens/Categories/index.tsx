@@ -4,17 +4,39 @@ import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
 import categoriesData from '../../shared/constans/categories.json';
+import { RootStackParamList } from '../../shared/types/navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+type Category = {
+  name: string;
+  imageUrl: string;
+};
 
 const CategoriesScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
+
+  const renderCategory = ({ item: category }: { item: Category }) => (
+    <View style={styles.categoryCard}>
+      <View style={styles.categoryIconContainer}>
+        <Image
+          source={{ uri: category.imageUrl }}
+          style={styles.categoryIcon}
+          resizeMode="contain"
+        />
+      </View>
+      <Typography customStyle={styles.categoryName} value={category.name} />
+    </View>
+  );
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: color.main.blue}} bounces={false}>
+    <View style={styles.container}>
       <HeroBackground>
         <View style={styles.header}>
           <TouchableOpacity 
@@ -32,20 +54,14 @@ const CategoriesScreen = () => {
       </HeroBackground>
 
       <View style={styles.body}>
-        <View style={styles.categoriesContainer}>
-          {categoriesData.categories.map((category, index) => (
-            <View key={index} style={styles.categoryCard}>
-              <View style={styles.categoryIconContainer}>
-                <Image
-                  source={{ uri: category.imageUrl }}
-                  style={styles.categoryIcon}
-                  resizeMode="contain"
-                />
-              </View>
-              <Typography customStyle={styles.categoryName} value={category.name} />
-            </View>
-          ))}
-        </View>
+        <FlatList
+          data={categoriesData.categories}
+          renderItem={renderCategory}
+          keyExtractor={(item, index) => index.toString()}
+          numColumns={2}
+          columnWrapperStyle={styles.categoriesRow}
+          contentContainerStyle={styles.categoriesContainer}
+        />
 
         <TouchableOpacity 
           style={styles.addButton}
@@ -57,7 +73,7 @@ const CategoriesScreen = () => {
           />
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

@@ -3,17 +3,21 @@ import Typography from '../../shared/components/Typography';
 import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
+import { RootStackParamList } from '../../shared/types/navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput } from 'react-native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AddCategoriesScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: color.main.blue}} bounces={false}>
+    <View style={{flex: 1, backgroundColor: color.main.blue}}>
       <HeroBackground>
         <View style={styles.header}>
           <TouchableOpacity 
@@ -69,7 +73,7 @@ const AddCategoriesScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

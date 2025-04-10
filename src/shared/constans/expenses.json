@@ -3,7 +3,7 @@
     {
       "id": 101,
       "title": "Restoran",
-      "amount": 150.00,
+      "amount": 150,
       "date": "2025-04-01",
       "category": "Yemek",
       "details": "Yemek yediğim restoran."
@@ -11,26 +11,114 @@
     {
       "id": 102,
       "title": "Market Alışverişi",
-      "amount": 200.00,
-      "date": "2025-04-02",
+      "amount": 450.75,
+      "date": "2025-04-01",
+      "category": "Alışveriş",
+      "details": "Haftalık market alışverişi"
+    },
+    {
+      "id": 103,
+      "title": "Benzin",
+      "amount": 1200,
+      "date": "2025-03-31",
+      "category": "Ulaşım",
+      "details": "Araç yakıt dolumu"
+    },
+    {
+      "id": 104,
+      "title": "Netflix",
+      "amount": 65.99,
+      "date": "2025-03-30",
+      "category": "Eğlence",
+      "details": "Aylık Netflix üyeliği"
+    },
+    {
+      "id": 105,
+      "title": "Elektrik Faturası",
+      "amount": 245.50,
+      "date": "2025-03-30",
+      "category": "Fatura",
+      "details": "Mart ayı elektrik faturası"
+    },
+    {
+      "id": 106,
+      "title": "Spor Salonu",
+      "amount": 350,
+      "date": "2025-03-29",
+      "category": "Sağlık",
+      "details": "Aylık spor salonu üyeliği"
+    },
+    {
+      "id": 107,
+      "title": "Kitap Alışverişi",
+      "amount": 175.25,
+      "date": "2025-03-28",
+      "category": "Alışveriş",
+      "details": "Online kitap siparişi"
+    },
+    {
+      "id": 108,
+      "title": "Kahve",
+      "amount": 45,
+      "date": "2025-03-28",
       "category": "Yemek",
-      "details": "Market alışverişi."
+      "details": "Starbucks kahve"
     },
     {
-      "id": 201,
+      "id": 109,
       "title": "Taksi",
-      "amount": 50.00,
-      "date": "2025-04-03",
+      "amount": 120,
+      "date": "2025-03-27",
       "category": "Ulaşım",
-      "details": "Taksi ücreti."
+      "details": "İş görüşmesi için taksi"
     },
     {
-      "id": 202,
-      "title": "Otobüs",
-      "amount": 30.00,
-      "date": "2025-04-04",
-      "category": "Ulaşım",
-      "details": "Otobüs bileti."
+      "id": 110,
+      "title": "Su Faturası",
+      "amount": 85.30,
+      "date": "2025-03-27",
+      "category": "Fatura",
+      "details": "Mart ayı su faturası"
+    },
+    {
+      "id": 111,
+      "title": "Sinema",
+      "amount": 95,
+      "date": "2025-03-26",
+      "category": "Eğlence",
+      "details": "Film bileti ve mısır"
+    },
+    {
+      "id": 112,
+      "title": "Giyim Alışverişi",
+      "amount": 750,
+      "date": "2025-03-25",
+      "category": "Alışveriş",
+      "details": "Yeni sezon kıyafetler"
+    },
+    {
+      "id": 113,
+      "title": "Doğalgaz",
+      "amount": 320,
+      "date": "2025-03-25",
+      "category": "Fatura",
+      "details": "Mart ayı doğalgaz faturası"
+    },
+    {
+      "id": 114,
+      "title": "Öğle Yemeği",
+      "amount": 85,
+      "date": "2025-03-24",
+      "category": "Yemek",
+      "details": "Ofis yakınındaki lokanta"
+    },
+    {
+      "id": 115,
+      "title": "İnternet",
+      "amount": 129.90,
+      "date": "2025-03-24",
+      "category": "Fatura",
+      "details": "Mart ayı internet faturası"
     }
   ]
 }

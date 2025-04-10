@@ -4,6 +4,10 @@ import { FONT } from '../../shared/constans/fonts';
 import { StyleSheet } from 'react-native';
 
 export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: color.main.blue
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,21 +36,20 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     borderTopStartRadius: normalize(16),
     flex: 1,
     paddingHorizontal: normalize(16),
-    paddingTop: normalize(16),
-    paddingBottom: normalize(32)
+    paddingTop: normalize(16)
   },
   categoriesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    paddingBottom: normalize(80)
+  },
+  categoriesRow: {
     justifyContent: 'space-between',
-    marginBottom: normalize(24)
+    marginBottom: normalize(16)
   },
   categoryCard: {
     width: '48%',
     backgroundColor: isDarkMode ? color.neutral.gray : color.neutral.white,
     borderRadius: normalize(16),
     padding: normalize(12),
-    marginBottom: normalize(16),
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -88,7 +91,11 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     backgroundColor: color.main.blue,
     borderRadius: normalize(8),
     paddingVertical: normalize(16),
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: normalize(16),
+    left: normalize(16),
+    right: normalize(16)
   },
   addButtonText: {
     color: color.neutral.white,
