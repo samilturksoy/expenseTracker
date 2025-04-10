@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Yemek",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png"
+    },
+    {
+      "id": 2,
+      "name": "Ulaşım",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/61/61232.png"
+    },
+    {
+      "id": 3,
+      "name": "Eğlence",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    },
+    {
+      "id": 4,
+      "name": "Fatura",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2040/2040504.png"
+    },
+    {
+      "id": 5,
+      "name": "Sağlık",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2965/2965567.png"
+    },
+    {
+      "id": 6,
+      "name": "Kira",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/942/942748.png"
+    },
+    {
+      "id": 7,
+      "name": "Alışveriş",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/1170/1170576.png"
+    },
+    {
+      "id": 8,
+      "name": "Tatil",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/201/201623.png"
+    },
+    {
+      "id": 9,
+      "name": "Ev Giderleri",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/1046/1046857.png"
+    },
+    {
+      "id": 10,
+      "name": "Telefon & İnternet",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/483/483947.png"
+    },
+    {
+      "id": 11,
+      "name": "Kredi Kartı Ödemesi",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/633/633611.png"
+    },
+    {
+      "id": 12,
+      "name": "Sigorta",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2920/2920209.png"
+    },
+    {
+      "id": 13,
+      "name": "Çocuk Giderleri",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/3461/3461607.png"
+    },
+    {
+      "id": 14,
+      "name": "Evcil Hayvan",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/616/616408.png"
+    },
+    {
+      "id": 15,
+      "name": "Kişisel Bakım",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/2883/2883844.png"
+    },
+    {
+      "id": 16,
+      "name": "Eğitim",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/190/190411.png"
+    },
+    {
+      "id": 17,
+      "name": "Yatırım",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/3514/3514491.png"
+    },
+    {
+      "id": 18,
+      "name": "Diğer",
+      "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828919.png"
+    }
+  ]
+}

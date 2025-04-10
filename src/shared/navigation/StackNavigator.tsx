@@ -5,12 +5,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Create a stack navigator
 const RootStack = createNativeStackNavigator({
-  screens: {
+  screenOptions:{
+    headerShown: false,
+    animation: 'fade'
+  },
+  screens: {    
     Home: screens.Home,
     AddCategories: screens.AddCategories,
     AddExpense: screens.AddExpense,
     ExpenseDetail: screens.ExpenseDetail
   }
+  
 });
 
 const StackNavigator = createStaticNavigation(RootStack);

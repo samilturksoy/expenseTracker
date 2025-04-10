@@ -1,0 +1,36 @@
+{
+  "expenses": [
+    {
+      "id": 101,
+      "title": "Restoran",
+      "amount": 150.00,
+      "date": "2025-04-01",
+      "category": "Yemek",
+      "details": "Yemek yediğim restoran."
+    },
+    {
+      "id": 102,
+      "title": "Market Alışverişi",
+      "amount": 200.00,
+      "date": "2025-04-02",
+      "category": "Yemek",
+      "details": "Market alışverişi."
+    },
+    {
+      "id": 201,
+      "title": "Taksi",
+      "amount": 50.00,
+      "date": "2025-04-03",
+      "category": "Ulaşım",
+      "details": "Taksi ücreti."
+    },
+    {
+      "id": 202,
+      "title": "Otobüs",
+      "amount": 30.00,
+      "date": "2025-04-04",
+      "category": "Ulaşım",
+      "details": "Otobüs bileti."
+    }
+  ]
+}
