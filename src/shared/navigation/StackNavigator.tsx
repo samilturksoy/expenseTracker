@@ -1,24 +1,27 @@
-import screens from '../../screens';
-import { createStaticNavigation } from '@react-navigation/native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { screens } from '../../screens';
 
+const Stack = createNativeStackNavigator();
 
-// Create a stack navigator
-const RootStack = createNativeStackNavigator({
-  screenOptions:{
-    headerShown: false,
-    animation: 'fade'
-  },
-  screens: {    
-    Home: screens.Home,
-    AddCategories: screens.AddCategories,
-    AddExpense: screens.AddExpense,
-    ExpenseDetail: screens.ExpenseDetail
-  }
-  
-});
-
-const StackNavigator = createStaticNavigation(RootStack);
+const StackNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={screens.Home} />
+        <Stack.Screen name="AddExpense" component={screens.AddExpense} />
+        <Stack.Screen name="Categories" component={screens.Categories} />
+        <Stack.Screen name="AddCategories" component={screens.AddCategories} />
+        <Stack.Screen name="ExpenseDetail" component={screens.ExpenseDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default StackNavigator;
 

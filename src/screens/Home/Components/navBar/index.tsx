@@ -1,9 +1,6 @@
 import { styles } from './styles';
 import Typography from '../../../../shared/components/Typography';
-import { normalize } from '../../../../shared/helpers';
-import color from '../../../../shared/constans/colors';
-import { FONT } from '../../../../shared/constans/fonts';
-import { TouchableOpacity, View } from 'react-native';
+import {  View } from 'react-native';
 import React from 'react';
 
 
@@ -21,19 +18,7 @@ export default function NavBar() {
           customStyle={styles.nameUser}
           value="Şamil TÜRKSOY" />
       </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        
-        <TouchableOpacity style={{position: 'relative'}}>
-        
-          <Typography customStyle={{
-            color: color.neutral.white,
-            textAlign: 'center',
-            fontSize: normalize(20),
-            fontFamily: FONT.BOLD
-          }} value="Expense Ekle " />
-         
-        </TouchableOpacity>
-      </View>
+     
     </View>
   );
 }

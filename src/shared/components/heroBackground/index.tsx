@@ -11,7 +11,7 @@ interface HeroBackgroundProps {
 export default function HeroBackground({children, height}: HeroBackgroundProps) {
   return (
     <ImageBackground style={{
-      height: height || 400,
+      height: height || 280,
       paddingTop: 15
     }} source={bgIcon}>
       <SafeAreaView style={{flex: 1}}>

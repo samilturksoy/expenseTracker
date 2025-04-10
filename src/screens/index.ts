@@ -1,12 +1,14 @@
 import Home from './Home';
-import AddCategories from './AddCategories';
 import AddExpense from './AddExpense';
+import Categories from './Categories';
+import AddCategories from './AddCategories';
 import ExpenseDetail from './ExpenseDetail';
 
-export default {
+export const screens = {
   Home,
-  AddCategories,
   AddExpense,
+  Categories,
+  AddCategories,
   ExpenseDetail
 };
 
