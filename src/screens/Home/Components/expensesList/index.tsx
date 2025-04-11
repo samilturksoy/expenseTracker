@@ -1,30 +1,13 @@
 import { styles } from './styles';
-import Typography from '../../../../shared/components/Typography';
+import ExpenseItem from './expenseItem';
 import { Expense } from '../../../../shared/types/expense';
-import { View, FlatList, TouchableOpacity } from 'react-native';
+import { RootStackParamList } from '../../../../shared/types/navigation';
+import { View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
-interface ExpenseItemProps {
-  item: Expense;
-  onPress: () => void;
-}
-
-const ExpenseItem = ({ item, onPress }: ExpenseItemProps) => {
-  return (
-    <TouchableOpacity style={styles.expenseItem} onPress={onPress}>
-      <View style={styles.leftContent}>
-        <Typography customStyle={styles.title} value={item.title} />
-        <Typography customStyle={styles.details} value={item.category} />
-        <Typography customStyle={styles.date} value={item.date} />
-      </View>
-      <Typography 
-        customStyle={styles.amount} 
-        value={`${item.amount.toFixed(2)} TL`} 
-      />
-    </TouchableOpacity>
-  );
-};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface ExpensesListProps {
   expenses: Expense[];
@@ -32,7 +15,7 @@ interface ExpensesListProps {
 }
 
 export default function ExpensesList({ expenses, onDeleteExpense }: ExpensesListProps) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const hasExpenses = expenses.length > 0;
 
   if (!hasExpenses) {

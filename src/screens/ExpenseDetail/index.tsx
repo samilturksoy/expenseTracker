@@ -5,9 +5,13 @@ import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
 import Balance from '../../shared/components/balance';
 import categoriesData from '../../shared/constans/categories.json';
+import { RootStackParamList } from '../../shared/types/navigation';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, ScrollView, TouchableOpacity, Alert, Image } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface RouteParams {
   expense: {
@@ -18,15 +22,14 @@ interface RouteParams {
     category: string;
     details: string;
   };
-  onDeleteExpense: (id: number) => void;
 }
 
 const ExpenseDetailScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
   const route = useRoute();
-  const navigation = useNavigation();
-  const { expense, onDeleteExpense } = route.params as RouteParams;
+  const navigation = useNavigation<NavigationProp>();
+  const { expense } = route.params as RouteParams;
 
   // Kategori ikonunu bul
   const categoryIcon = categoriesData.categories.find(
@@ -45,8 +48,10 @@ const ExpenseDetailScreen = () => {
         {
           text: 'Sil',
           onPress: () => {
-            onDeleteExpense(expense.id);
-            navigation.goBack();
+            navigation.navigate('Home', { 
+              action: 'deleteExpense',
+              expenseId: expense.id 
+            });
           },
           style: 'destructive'
         }

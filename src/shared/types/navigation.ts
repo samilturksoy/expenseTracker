@@ -2,7 +2,10 @@ import { Expense as ExpenseModel } from './expense';
 import { Category as CategoryModel } from './category';
 
 export type RootStackParamList = {
-  Home: undefined;
+  Home: {
+    action?: 'deleteExpense';
+    expenseId?: number;
+  };
   AddExpense: { 
     onAddExpense: (expense: ExpenseModel) => void;
     categories: CategoryModel[];
