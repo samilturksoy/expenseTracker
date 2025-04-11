@@ -1,12 +1,11 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import StackNavigator from './src/shared/navigation/StackNavigator';
+import * as React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-function App(): React.JSX.Element {
+export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 36 }}>IMPLEMENT ME</Text>
-    </View>
+    <SafeAreaProvider>
+      <StackNavigator />
+    </SafeAreaProvider>
   );
 }
-
-export default App;

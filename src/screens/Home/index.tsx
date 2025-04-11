@@ -1,0 +1,95 @@
+import { createStyles } from './styles';
+import NavBar from './Components/navBar';
+import ExpensesList from './Components/expensesList';
+import useDarkMode from '../../shared/hooks/useDarkMode';
+import HeroBackground from '../../shared/components/heroBackground';
+import color from '../../shared/constans/colors';
+import Balance from '../../shared/components/balance';
+import CategoriesSlider from '../../shared/components/categoriesSlider';
+import Typography from '../../shared/components/Typography';
+import { RootStackParamList } from '../../shared/types/navigation';
+import { Expense as ExpenseModel } from '../../shared/types/expense';
+import { Category as CategoryModel } from '../../shared/types/category';
+import expensesData from '../../shared/constans/expenses.json';
+import categoriesData from '../../shared/constans/categories.json';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity } from 'react-native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+const HomeScreen = () => {
+  const { isDarkMode } = useDarkMode();
+  const styles = createStyles(isDarkMode);
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute();
+
+  const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses);
+  const [categories, setCategories] = useState<CategoryModel[]>(categoriesData.categories);
+
+  useEffect(() => {
+    if (route.params?.action === 'deleteExpense' && route.params?.expenseId) {
+      handleDeleteExpense(route.params.expenseId);
+      navigation.setParams({ action: undefined, expenseId: undefined });
+    }
+  }, [route.params]);
+
+  const handleAddExpense = (newExpense: ExpenseModel) => {
+    setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
+  };
+
+  const handleDeleteExpense = (id: number) => {
+    setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
+  };
+
+  const handleAddCategory = (newCategory: CategoryModel) => {
+    setCategories(prevCategories => [...prevCategories, newCategory]);
+  };
+
+  return (
+    <View style={{flex: 1, backgroundColor: color.main.blue}}>
+      <HeroBackground>
+        <NavBar />
+        <Balance amount={expenses.reduce((sum, expense) => sum + expense.amount, 0)} title="Toplam Harcama" />
+      </HeroBackground>
+
+      <View style={styles.body}>
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Typography customStyle={styles.sectionTitle} value="Kategoriler" />
+            <TouchableOpacity onPress={() => navigation.navigate('Categories', { 
+              categories: categories,
+              onAddCategory: handleAddCategory 
+            })}>
+              <Typography customStyle={styles.seeAllButton} value="Tümünü Gör" />
+            </TouchableOpacity>
+          </View>
+          <CategoriesSlider categories={categories} />
+        </View>
+
+        <View style={[styles.section, { flex: 1 }]}>
+          <View style={styles.sectionHeader}>
+            <Typography customStyle={styles.sectionTitle} value="Son Harcamalar" />
+          </View>
+          <ExpensesList expenses={expenses} onDeleteExpense={handleDeleteExpense} />
+        </View>
+
+        <TouchableOpacity 
+          style={styles.addButton}
+          onPress={() => navigation.navigate('AddExpense', { 
+            onAddExpense: handleAddExpense,
+            categories: categories 
+          })}
+        >
+          <Typography 
+            customStyle={styles.addButtonText} 
+            value="+ Yeni Harcama Ekle" 
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export default HomeScreen;
