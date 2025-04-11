@@ -13,7 +13,7 @@ export type Expense = {
 export type RootStackParamList = {
   Home: undefined;
   AddExpense: { onAddExpense: (expense: ExpenseModel) => void };
-  ExpenseDetail: { expense: ExpenseModel };
+  ExpenseDetail: { expense: ExpenseModel; onDeleteExpense: (id: number) => void };
   Categories: undefined;
   AddCategories: undefined;
 };
