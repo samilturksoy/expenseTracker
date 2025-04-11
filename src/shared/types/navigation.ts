@@ -1,3 +1,5 @@
+import { Expense as ExpenseModel } from './expense';
+
 export type Expense = {
   id: number;
   title: string;
@@ -9,10 +11,8 @@ export type Expense = {
 
 export type RootStackParamList = {
   Home: undefined;
-  AddExpense: undefined;
+  AddExpense: { onAddExpense: (expense: ExpenseModel) => void };
+  ExpenseDetail: { expense: ExpenseModel };
   Categories: undefined;
   AddCategories: undefined;
-  ExpenseDetail: {
-    expense: Expense;
-  };
 };

@@ -1,19 +1,12 @@
 import { styles } from './styles';
 import Typography from '../../../../shared/components/Typography';
-import expensesData from '../../../../shared/constans/expenses.json';
+import { Expense } from '../../../../shared/types/expense';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 interface ExpenseItemProps {
-  item: {
-    id: number;
-    title: string;
-    amount: number;
-    date: string;
-    category: string;
-    details: string;
-  };
+  item: Expense;
   onPress: () => void;
 }
 
@@ -33,16 +26,19 @@ const ExpenseItem = ({ item, onPress }: ExpenseItemProps) => {
   );
 };
 
-export default function ExpensesList() {
+interface ExpensesListProps {
+  expenses: Expense[];
+}
+
+export default function ExpensesList({ expenses }: ExpensesListProps) {
   const navigation = useNavigation();
-  const expenses = expensesData?.expenses || [];
   const hasExpenses = expenses.length > 0;
 
   if (!hasExpenses) {
     return null;
   }
 
-  const handleExpensePress = (expense: ExpenseItemProps['item']) => {
+  const handleExpensePress = (expense: Expense) => {
     navigation.navigate('ExpenseDetail', { expense });
   };
 

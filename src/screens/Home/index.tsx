@@ -1,26 +1,19 @@
-import { View, TouchableOpacity } from 'react-native';
-import React from 'react';
 import { createStyles } from './styles';
-import Typography from '../../shared/components/Typography';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import NavBar from './Components/navBar';
+import ExpensesList from './Components/expensesList';
 import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
-import NavBar from './Components/navBar';
 import Balance from '../../shared/components/balance';
 import CategoriesSlider from '../../shared/components/categoriesSlider';
-import ExpensesList from './Components/expensesList';
+import Typography from '../../shared/components/Typography';
 import { RootStackParamList } from '../../shared/types/navigation';
-
-export type Expense = {
-  id: number;
-  title: string;
-  amount: number;
-  date: string;
-  category: string;
-  details: string;
-};
+import { Expense } from '../../shared/types/expense';
+import expensesData from '../../shared/constans/expenses.json';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -28,12 +21,17 @@ const HomeScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<NavigationProp>();
+  const [expenses, setExpenses] = useState<Expense[]>(expensesData.expenses);
+
+  const handleAddExpense = (newExpense: Expense) => {
+    setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: color.main.blue}}>
       <HeroBackground>
         <NavBar />
-        <Balance amount={1250} title="Toplam Harcama" />
+        <Balance amount={expenses.reduce((sum, expense) => sum + expense.amount, 0)} title="Toplam Harcama" />
       </HeroBackground>
 
       <View style={styles.body}>
@@ -51,12 +49,12 @@ const HomeScreen = () => {
           <View style={styles.sectionHeader}>
             <Typography customStyle={styles.sectionTitle} value="Son Harcamalar" />
           </View>
-          <ExpensesList />
+          <ExpensesList expenses={expenses} />
         </View>
 
         <TouchableOpacity 
           style={styles.addButton}
-          onPress={() => navigation.navigate('AddExpense')}
+          onPress={() => navigation.navigate('AddExpense', { onAddExpense })}
         >
           <Typography 
             customStyle={styles.addButtonText} 
