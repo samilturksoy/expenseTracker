@@ -4,17 +4,42 @@ import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
 import { RootStackParamList } from '../../shared/types/navigation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import { Category as CategoryModel } from '../../shared/types/category';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { View, TouchableOpacity, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput, Alert } from 'react-native';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+type AddCategoryScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type AddCategoryScreenProps = NativeStackScreenProps<RootStackParamList, 'AddCategories'>;
 
 const AddCategoriesScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<AddCategoryScreenNavigationProp>();
+  const route = useRoute<AddCategoryScreenProps['route']>();
+  const { onAddCategory } = route.params;
+  const [categoryName, setCategoryName] = React.useState('');
+  const [iconUrl, setIconUrl] = React.useState('');
+
+  const handleAddCategory = () => {
+    // Boş alan kontrolü
+    if (!categoryName.trim() || !iconUrl.trim()) {
+      Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
+      return;
+    }
+
+    const newCategory: CategoryModel = {
+      id: Date.now(),
+      imageUrl: iconUrl.trim(),
+      name: categoryName.trim()
+    };
+
+    onAddCategory(newCategory);
+    navigation.navigate('Home');
+  };
+ 
 
   return (
     <View style={{flex: 1, backgroundColor: color.main.blue}}>
@@ -39,6 +64,7 @@ const AddCategoriesScreen = () => {
           <View style={styles.inputContainer}>
             <Typography customStyle={styles.label} value="Kategori Adı" />
             <TextInput
+              onChangeText={setCategoryName}
               style={[
                 styles.input,
                 { color: isDarkMode ? color.neutral.white : color.neutral.black }
@@ -51,6 +77,8 @@ const AddCategoriesScreen = () => {
           <View style={styles.inputContainer}>
             <Typography customStyle={styles.label} value="İkon URL" />
             <TextInput
+              onChangeText={setIconUrl}
+              defaultValue='https://cdn-icons-png.flaticon.com/512/1828/1828919.png'
               style={[
                 styles.input,
                 { color: isDarkMode ? color.neutral.white : color.neutral.black }
@@ -62,9 +90,7 @@ const AddCategoriesScreen = () => {
 
           <TouchableOpacity 
             style={styles.addButton}
-            onPress={() => {
-              navigation.navigate('Home');
-            }}
+            onPress={handleAddCategory}
           >
             <Typography 
               customStyle={styles.addButtonText} 
