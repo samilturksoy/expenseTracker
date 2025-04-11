@@ -29,6 +29,10 @@ const HomeScreen = () => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
   };
 
+  const handleDeleteExpense = (id: number) => {
+    setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: color.main.blue}}>
       <HeroBackground>
@@ -51,7 +55,7 @@ const HomeScreen = () => {
           <View style={styles.sectionHeader}>
             <Typography customStyle={styles.sectionTitle} value="Son Harcamalar" />
           </View>
-          <ExpensesList expenses={expenses} />
+          <ExpensesList expenses={expenses} onDeleteExpense={handleDeleteExpense} />
         </View>
 
         <TouchableOpacity 
