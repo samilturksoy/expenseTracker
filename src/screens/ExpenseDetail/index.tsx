@@ -18,6 +18,7 @@ interface RouteParams {
     category: string;
     details: string;
   };
+  onDeleteExpense: (id: number) => void;
 }
 
 const ExpenseDetailScreen = () => {
@@ -25,7 +26,7 @@ const ExpenseDetailScreen = () => {
   const styles = createStyles(isDarkMode);
   const route = useRoute();
   const navigation = useNavigation();
-  const { expense } = route.params as RouteParams;
+  const { expense, onDeleteExpense } = route.params as RouteParams;
 
   // Kategori ikonunu bul
   const categoryIcon = categoriesData.categories.find(
@@ -44,7 +45,7 @@ const ExpenseDetailScreen = () => {
         {
           text: 'Sil',
           onPress: () => {
-            // Silme işlemi burada yapılacak
+            onDeleteExpense(expense.id);
             navigation.goBack();
           },
           style: 'destructive'

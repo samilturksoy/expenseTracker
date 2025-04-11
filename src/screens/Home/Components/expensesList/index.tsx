@@ -28,9 +28,10 @@ const ExpenseItem = ({ item, onPress }: ExpenseItemProps) => {
 
 interface ExpensesListProps {
   expenses: Expense[];
+  onDeleteExpense: (id: number) => void;
 }
 
-export default function ExpensesList({ expenses }: ExpensesListProps) {
+export default function ExpensesList({ expenses, onDeleteExpense }: ExpensesListProps) {
   const navigation = useNavigation();
   const hasExpenses = expenses.length > 0;
 
@@ -39,7 +40,7 @@ export default function ExpensesList({ expenses }: ExpensesListProps) {
   }
 
   const handleExpensePress = (expense: Expense) => {
-    navigation.navigate('ExpenseDetail', { expense });
+    navigation.navigate('ExpenseDetail', { expense, onDeleteExpense });
   };
 
   return (
