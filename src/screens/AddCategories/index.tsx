@@ -21,12 +21,12 @@ const AddCategoriesScreen = () => {
   const route = useRoute<AddCategoryScreenProps['route']>();
   const { onAddCategory } = route.params;
   const [categoryName, setCategoryName] = React.useState('');
-  const [iconUrl, setIconUrl] = React.useState('');
+  const [iconUrl, setIconUrl] = React.useState('https://cdn-icons-png.flaticon.com/512/1828/1828919.png');
 
   const handleAddCategory = () => {
     // Boş alan kontrolü
-    if (!categoryName.trim() || !iconUrl.trim()) {
-      Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
+    if (!categoryName.trim()) {
+      Alert.alert('Hata', 'Lütfen kategori adını giriniz');
       return;
     }
 
@@ -37,7 +37,7 @@ const AddCategoriesScreen = () => {
     };
 
     onAddCategory(newCategory);
-    navigation.navigate('Home');
+    navigation.goBack();
   };
  
 

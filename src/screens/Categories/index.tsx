@@ -3,26 +3,36 @@ import Typography from '../../shared/components/Typography';
 import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
-import categoriesData from '../../shared/constans/categories.json';
 import { RootStackParamList } from '../../shared/types/navigation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import { Category as CategoryModel } from '../../shared/types/category';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image, FlatList } from 'react-native';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-type Category = {
-  name: string;
-  imageUrl: string;
-};
+type CategoriesScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type CategoriesScreenProps = NativeStackScreenProps<RootStackParamList, 'Categories'>;
 
 const CategoriesScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<CategoriesScreenNavigationProp>();
+  const route = useRoute<CategoriesScreenProps['route']>();
+  const { onAddCategory } = route.params;
+  const [localCategories, setLocalCategories] = useState<CategoryModel[]>([]);
 
-  const renderCategory = ({ item: category }: { item: Category }) => (
+  useEffect(() => {
+    if (route.params?.categories) {
+      setLocalCategories(route.params.categories);
+    }
+  }, [route.params?.categories]);
+
+  const handleLocalAddCategory = (newCategory: CategoryModel) => {
+    onAddCategory(newCategory);
+    setLocalCategories(prev => [...prev, newCategory]);
+  };
+
+  const renderCategory = ({ item: category }: { item: CategoryModel }) => (
     <View style={styles.categoryCard}>
       <View style={styles.categoryIconContainer}>
         <Image
@@ -55,7 +65,7 @@ const CategoriesScreen = () => {
 
       <View style={styles.body}>
         <FlatList
-          data={categoriesData.categories}
+          data={localCategories}
           renderItem={renderCategory}
           keyExtractor={(item, index) => index.toString()}
           numColumns={2}
@@ -65,7 +75,7 @@ const CategoriesScreen = () => {
 
         <TouchableOpacity 
           style={styles.addButton}
-          onPress={() => navigation.navigate('AddCategories')}
+          onPress={() => navigation.navigate('AddCategories', { onAddCategory: handleLocalAddCategory })}
         >
           <Typography 
             customStyle={styles.addButtonText} 

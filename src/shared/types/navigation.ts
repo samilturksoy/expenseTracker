@@ -3,8 +3,14 @@ import { Category as CategoryModel } from './category';
 
 export type RootStackParamList = {
   Home: undefined;
-  AddExpense: { onAddExpense: (expense: ExpenseModel) => void };
+  AddExpense: { 
+    onAddExpense: (expense: ExpenseModel) => void;
+    categories: CategoryModel[];
+  };
   ExpenseDetail: { expense: ExpenseModel; onDeleteExpense: (id: number) => void };
-  Categories: undefined;
+  Categories: { 
+    categories: CategoryModel[];
+    onAddCategory: (category: CategoryModel) => void;
+  };
   AddCategories: { onAddCategory: (category: CategoryModel) => void };
 };

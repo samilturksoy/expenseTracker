@@ -9,7 +9,9 @@ import CategoriesSlider from '../../shared/components/categoriesSlider';
 import Typography from '../../shared/components/Typography';
 import { RootStackParamList } from '../../shared/types/navigation';
 import { Expense as ExpenseModel } from '../../shared/types/expense';
+import { Category as CategoryModel } from '../../shared/types/category';
 import expensesData from '../../shared/constans/expenses.json';
+import categoriesData from '../../shared/constans/categories.json';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
@@ -22,8 +24,8 @@ const HomeScreen = () => {
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<NavigationProp>();
 
-  //Her bir eleman ExpenseModel tipinde olmalı başlangıç değeri olarak [] kontrol edildi patlamadı :)
   const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses);
+  const [categories, setCategories] = useState<CategoryModel[]>(categoriesData.categories);
 
   const handleAddExpense = (newExpense: ExpenseModel) => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
@@ -31,6 +33,10 @@ const HomeScreen = () => {
 
   const handleDeleteExpense = (id: number) => {
     setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
+  };
+
+  const handleAddCategory = (newCategory: CategoryModel) => {
+    setCategories(prevCategories => [...prevCategories, newCategory]);
   };
 
   return (
@@ -44,11 +50,14 @@ const HomeScreen = () => {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Typography customStyle={styles.sectionTitle} value="Kategoriler" />
-            <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Categories', { 
+              categories: categories,
+              onAddCategory: handleAddCategory 
+            })}>
               <Typography customStyle={styles.seeAllButton} value="Tümünü Gör" />
             </TouchableOpacity>
           </View>
-          <CategoriesSlider />
+          <CategoriesSlider categories={categories} />
         </View>
 
         <View style={[styles.section, { flex: 1 }]}>
@@ -60,7 +69,10 @@ const HomeScreen = () => {
 
         <TouchableOpacity 
           style={styles.addButton}
-          onPress={() => navigation.navigate('AddExpense', { onAddExpense: handleAddExpense })}
+          onPress={() => navigation.navigate('AddExpense', { 
+            onAddExpense: handleAddExpense,
+            categories: categories 
+          })}
         >
           <Typography 
             customStyle={styles.addButtonText} 

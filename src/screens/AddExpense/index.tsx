@@ -19,7 +19,7 @@ const AddExpenseScreen = () => {
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<AddExpenseScreenNavigationProp>();
   const route = useRoute<AddExpenseScreenProps['route']>();
-  const { onAddExpense } = route.params;
+  const { onAddExpense, categories } = route.params;
   
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
@@ -73,7 +73,7 @@ const AddExpenseScreen = () => {
       <View style={styles.body}>
         <View style={styles.form}>
           <View style={styles.inputContainer}>
-            <Typography customStyle={styles.label} value="Harcama Başlığı" />
+            <Typography customStyle={styles.label} value="Başlık" />
             <TextInput
               style={[
                 styles.input,
@@ -87,14 +87,14 @@ const AddExpenseScreen = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Typography customStyle={styles.label} value="Harcama Tutarı" />
+            <Typography customStyle={styles.label} value="Tutar" />
             <TextInput
               style={[
                 styles.input,
                 { color: isDarkMode ? color.neutral.white : color.neutral.black }
               ]}
               placeholderTextColor={isDarkMode ? color.neutral.lightGray : color.neutral.darkGray}
-              placeholder="0.00 TL"
+              placeholder="Harcama tutarını giriniz"
               value={amount}
               onChangeText={setAmount}
               keyboardType="numeric"
@@ -104,6 +104,7 @@ const AddExpenseScreen = () => {
           <View style={styles.inputContainer}>
             <Typography customStyle={styles.label} value="Kategori" />
             <CategoriesSlider 
+              categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
