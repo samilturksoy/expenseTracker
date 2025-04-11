@@ -1,5 +1,6 @@
 import { Expense as ExpenseModel } from './expense';
 
+//TODO burada sanki side effeckt oluşturuyorum refactor edilmeli
 export type Expense = {
   id: number;
   title: string;

@@ -8,7 +8,7 @@ import Balance from '../../shared/components/balance';
 import CategoriesSlider from '../../shared/components/categoriesSlider';
 import Typography from '../../shared/components/Typography';
 import { RootStackParamList } from '../../shared/types/navigation';
-import { Expense } from '../../shared/types/expense';
+import { Expense as ExpenseModel } from '../../shared/types/expense';
 import expensesData from '../../shared/constans/expenses.json';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -21,9 +21,11 @@ const HomeScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<NavigationProp>();
-  const [expenses, setExpenses] = useState<Expense[]>(expensesData.expenses);
 
-  const handleAddExpense = (newExpense: Expense) => {
+  //Her bir eleman ExpenseModel tipinde olmalı başlangıç değeri olarak [] kontrol edildi patlamadı :)
+  const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses);
+
+  const handleAddExpense = (newExpense: ExpenseModel) => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
   };
 
@@ -54,7 +56,7 @@ const HomeScreen = () => {
 
         <TouchableOpacity 
           style={styles.addButton}
-          onPress={() => navigation.navigate('AddExpense', { onAddExpense })}
+          onPress={() => navigation.navigate('AddExpense', { onAddExpense: handleAddExpense })}
         >
           <Typography 
             customStyle={styles.addButtonText} 
