@@ -1,6 +1,7 @@
 import { styles } from './styles';
-import ExpenseItem from './expenseItem';
+import ExpenseItem from '../expenseItem';
 import { Expense } from '../../../../shared/types/expense';
+import { Category } from '../../../../shared/types/category';
 import { RootStackParamList } from '../../../../shared/types/navigation';
 import { View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -11,10 +12,11 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 interface ExpensesListProps {
   expenses: Expense[];
+  categories: Category[];
   onDeleteExpense: (id: number) => void;
 }
 
-export default function ExpensesList({ expenses, onDeleteExpense }: ExpensesListProps) {
+export default function ExpensesList({ expenses, categories, onDeleteExpense }: ExpensesListProps) {
   const navigation = useNavigation<NavigationProp>();
   const hasExpenses = expenses.length > 0;
 
@@ -33,6 +35,7 @@ export default function ExpensesList({ expenses, onDeleteExpense }: ExpensesList
         renderItem={({ item }) => (
           <ExpenseItem 
             item={item} 
+            categories={categories}
             onPress={() => handleExpensePress(item)}
           />
         )}

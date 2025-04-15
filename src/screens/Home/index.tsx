@@ -26,8 +26,8 @@ const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp>();
 
-  const [expenses, setExpenses] = useState<ExpenseModel[]>([]); //expensesData
-  const [categories, setCategories] = useState<CategoryModel[]>([]); //categoriesData
+  const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses); //expensesData
+  const [categories, setCategories] = useState<CategoryModel[]>(categoriesData.categories); //categoriesData
 
   const handleAddExpense = (newExpense: ExpenseModel) => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
@@ -66,7 +66,11 @@ const HomeScreen = () => {
           <View style={styles.sectionHeader}>
             <Typography customStyle={styles.sectionTitle} value="Son Harcamalar" />
           </View>
-          <ExpensesList expenses={expenses} onDeleteExpense={handleDeleteExpense} />
+          <ExpensesList 
+            expenses={expenses} 
+            categories={categories}
+            onDeleteExpense={handleDeleteExpense} 
+          />
         </View>
 
         <TouchableOpacity 
