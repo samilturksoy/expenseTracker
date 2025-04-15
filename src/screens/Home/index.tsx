@@ -26,8 +26,8 @@ const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp>();
 
-  const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses);
-  const [categories, setCategories] = useState<CategoryModel[]>(categoriesData.categories);
+  const [expenses, setExpenses] = useState<ExpenseModel[]>([]); //expensesData
+  const [categories, setCategories] = useState<CategoryModel[]>([]); //categoriesData
 
   const handleAddExpense = (newExpense: ExpenseModel) => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
