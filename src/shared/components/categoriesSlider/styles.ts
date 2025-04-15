@@ -7,15 +7,16 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
   container: {
     flexGrow: 0,
     marginHorizontal: normalize(-16),
-    paddingHorizontal: normalize(16)
+    paddingHorizontal: normalize(16),
+    paddingVertical: normalize(8)
   },
   categoryCard: {
     backgroundColor: isDarkMode ? color.neutral.gray : color.neutral.white,
     borderRadius: normalize(12),
     padding: normalize(12),
-    marginRight: normalize(12),
+    marginRight: normalize(8),
     alignItems: 'center',
-    width: normalize(100),
+    width: normalize(90),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
