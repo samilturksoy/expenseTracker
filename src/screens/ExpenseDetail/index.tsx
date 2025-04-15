@@ -9,27 +9,17 @@ import { RootStackParamList } from '../../shared/types/navigation';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, ScrollView, TouchableOpacity, Alert, Image } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-interface RouteParams {
-  expense: {
-    id: number;
-    title: string;
-    amount: number;
-    date: string;
-    category: string;
-    details: string;
-  };
-}
+type RouteProp = NativeStackScreenProps<RootStackParamList, 'ExpenseDetail'>['route'];
 
 const ExpenseDetailScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
-  const route = useRoute();
+  const route = useRoute<RouteProp>();
   const navigation = useNavigation<NavigationProp>();
-  const { expense } = route.params as RouteParams;
+  const { expense, onDeleteExpense } = route.params;
 
   // Kategori ikonunu bul
   const categoryIcon = categoriesData.categories.find(
@@ -48,10 +38,8 @@ const ExpenseDetailScreen = () => {
         {
           text: 'Sil',
           onPress: () => {
-            navigation.navigate('Home', { 
-              action: 'deleteExpense',
-              expenseId: expense.id 
-            });
+            onDeleteExpense(expense.id);
+            navigation.goBack();
           },
           style: 'destructive'
         }

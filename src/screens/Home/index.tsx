@@ -12,28 +12,22 @@ import { Expense as ExpenseModel } from '../../shared/types/expense';
 import { Category as CategoryModel } from '../../shared/types/category';
 import expensesData from '../../shared/constans/expenses.json';
 import categoriesData from '../../shared/constans/categories.json';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type RouteProp = NativeStackScreenProps<RootStackParamList, 'Home'>['route'];
 
 const HomeScreen = () => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<NavigationProp>();
-  const route = useRoute();
+  const route = useRoute<RouteProp>();
 
   const [expenses, setExpenses] = useState<ExpenseModel[]>(expensesData.expenses);
   const [categories, setCategories] = useState<CategoryModel[]>(categoriesData.categories);
-
-  useEffect(() => {
-    if (route.params?.action === 'deleteExpense' && route.params?.expenseId) {
-      handleDeleteExpense(route.params.expenseId);
-      navigation.setParams({ action: undefined, expenseId: undefined });
-    }
-  }, [route.params]);
 
   const handleAddExpense = (newExpense: ExpenseModel) => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
