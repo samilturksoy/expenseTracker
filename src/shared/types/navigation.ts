@@ -14,6 +14,7 @@ export type RootStackParamList = {
   Categories: { 
     categories: CategoryModel[];
     onAddCategory: (category: CategoryModel) => void;
+    expenses?: ExpenseModel[];
   };
   AddCategories: { onAddCategory: (category: CategoryModel) => void };
   CategoryExpenseList: { 

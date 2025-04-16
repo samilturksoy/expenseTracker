@@ -101,12 +101,13 @@ const AddExpenseScreen = () => {
             />
           </View>
 
-          <View style={styles.inputContainer}>
-            <Typography customStyle={styles.label} value="Kategori" />
+          <View style={styles.section}>
+            <Typography customStyle={styles.sectionTitle} value="Kategori Seç" />
             <CategoriesSlider 
               categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
+              mode="selection"
             />
           </View>
 

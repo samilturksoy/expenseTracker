@@ -4,6 +4,10 @@ import { FONT } from '../../shared/constans/fonts';
 import { StyleSheet } from 'react-native';
 
 export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: color.main.blue
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -25,6 +29,22 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     fontFamily: FONT.BOLD,
     color: color.neutral.white
   },
+  amountContainer: {
+    paddingHorizontal: normalize(24),
+    marginTop: normalize(8),
+    marginBottom: normalize(24)
+  },
+  amountLabel: {
+    fontSize: normalize(16),
+    fontFamily: FONT.MEDIUM,
+    color: color.neutral.lightGray,
+    marginBottom: normalize(4)
+  },
+  amount: {
+    fontSize: normalize(32),
+    fontFamily: FONT.BOLD,
+    color: color.neutral.white
+  },
   body: {
     backgroundColor: isDarkMode ? color.neutral.black : color.neutral.white,
     marginTop: normalize(-45),
@@ -32,12 +52,12 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     borderTopStartRadius: normalize(16),
     flex: 1,
     paddingHorizontal: normalize(16),
-    paddingTop: normalize(4)
+    paddingTop: normalize(24)
   },
   card: {
     backgroundColor: isDarkMode ? color.neutral.gray : color.neutral.white,
     borderRadius: normalize(16),
-    padding: normalize(12),
+    padding: normalize(20),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -50,7 +70,10 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
   categoryContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: normalize(12)
+    marginBottom: normalize(24),
+    backgroundColor: isDarkMode ? color.neutral.black : color.neutral.white,
+    borderRadius: normalize(12),
+    padding: normalize(16)
   },
   categoryIconContainer: {
     width: normalize(56),
@@ -59,7 +82,7 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     backgroundColor: color.neutral.white,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: normalize(12),
+    marginRight: normalize(16),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -76,46 +99,38 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
   categoryInfo: {
     flex: 1
   },
+  categoryLabel: {
+    fontSize: normalize(14),
+    fontFamily: FONT.MEDIUM,
+    color: isDarkMode ? color.neutral.lightGray : color.neutral.darkGray,
+    marginBottom: normalize(4)
+  },
   categoryText: {
     fontSize: normalize(18),
     fontFamily: FONT.BOLD,
-    color: isDarkMode ? color.neutral.white : color.neutral.black,
-    marginTop: normalize(4)
+    color: isDarkMode ? color.neutral.white : color.neutral.black
   },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: normalize(8)
+  infoSection: {
+    marginBottom: normalize(24)
   },
-  label: {
+  infoLabel: {
     fontSize: normalize(14),
     fontFamily: FONT.MEDIUM,
-    color: isDarkMode ? color.neutral.lightGray : color.neutral.darkGray
+    color: isDarkMode ? color.neutral.lightGray : color.neutral.darkGray,
+    marginBottom: normalize(8)
   },
-  value: {
+  infoValue: {
     fontSize: normalize(16),
-    fontFamily: FONT.NORMAL,
+    fontFamily: FONT.MEDIUM,
     color: isDarkMode ? color.neutral.white : color.neutral.black,
-    flex: 1,
-    marginLeft: normalize(8)
-  },
-  detailsContainer: {
-    marginTop: normalize(4),
-    marginBottom: normalize(12)
-  },
-  details: {
-    fontSize: normalize(16),
-    fontFamily: FONT.NORMAL,
-    color: isDarkMode ? color.neutral.white : color.neutral.black,
-    marginTop: normalize(4),
     lineHeight: normalize(24)
   },
   deleteButton: {
     backgroundColor: color.secondary.red,
-    borderRadius: normalize(8),
-    paddingVertical: normalize(12),
+    borderRadius: normalize(12),
+    paddingVertical: normalize(16),
     alignItems: 'center',
-    marginTop: normalize(4)
+    marginTop: normalize(8)
   },
   deleteButtonText: {
     color: color.neutral.white,

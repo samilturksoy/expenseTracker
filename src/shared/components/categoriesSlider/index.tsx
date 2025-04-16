@@ -4,24 +4,48 @@ import useDarkMode from '../../hooks/useDarkMode';
 import { Category } from '../../types/category';
 import { View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types/navigation';
 
 interface CategoriesSliderProps {
   categories?: Category[];
   selectedCategory?: string;
   onSelectCategory?: (category: string) => void;
+  mode?: 'selection' | 'navigation';
+  expenses?: any[];
+  onDeleteExpense?: (id: number) => void;
 }
 
 const CategoriesSlider: React.FC<CategoriesSliderProps> = ({
   categories = [],
   selectedCategory,
-  onSelectCategory
+  onSelectCategory,
+  mode = 'navigation',
+  expenses = [],
+  onDeleteExpense
 }) => {
   const { isDarkMode } = useDarkMode();
   const styles = createStyles(isDarkMode);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   if (!categories || categories.length === 0) {
     return null;
   }
+
+  const handleCategoryPress = (category: Category) => {
+    if (mode === 'selection' && onSelectCategory) {
+      onSelectCategory(category.name);
+    } else {
+      // Filter expenses for this category
+      const categoryExpenses = expenses.filter(expense => expense.category === category.name);
+      navigation.navigate('CategoryExpenseList', {
+        category,
+        expenses: categoryExpenses,
+        onDeleteExpense
+      });
+    }
+  };
 
   return (
     <ScrollView
@@ -36,7 +60,7 @@ const CategoriesSlider: React.FC<CategoriesSliderProps> = ({
             styles.categoryCard,
             selectedCategory === category.name && styles.selectedCard
           ]}
-          onPress={() => onSelectCategory?.(category.name)}
+          onPress={() => handleCategoryPress(category)}
         >
           <View style={styles.categoryIconContainer}>
             <Image

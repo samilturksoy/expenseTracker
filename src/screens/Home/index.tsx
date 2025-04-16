@@ -54,12 +54,17 @@ const HomeScreen = () => {
             <Typography customStyle={styles.sectionTitle} value="Kategoriler" />
             <TouchableOpacity onPress={() => navigation.navigate('Categories', { 
               categories: categories,
-              onAddCategory: handleAddCategory 
+              onAddCategory: handleAddCategory,
+              expenses: expenses
             })}>
               <Typography customStyle={styles.seeAllButton} value="Tümünü Gör" />
             </TouchableOpacity>
           </View>
-          <CategoriesSlider categories={categories} />
+          <CategoriesSlider 
+            categories={categories} 
+            expenses={expenses}
+            onDeleteExpense={handleDeleteExpense}
+          />
         </View>
 
         <View style={[styles.section, { flex: 1 }]}>

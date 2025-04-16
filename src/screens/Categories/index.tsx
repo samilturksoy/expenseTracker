@@ -9,6 +9,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+import CategoriesSlider from '../../shared/components/categoriesSlider';
 
 type CategoriesScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 type CategoriesScreenProps = NativeStackScreenProps<RootStackParamList, 'Categories'>;
@@ -18,7 +19,7 @@ const CategoriesScreen = () => {
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<CategoriesScreenNavigationProp>();
   const route = useRoute<CategoriesScreenProps['route']>();
-  const { onAddCategory } = route.params;
+  const { onAddCategory, expenses = [] } = route.params;
   const [localCategories, setLocalCategories] = useState<CategoryModel[]>([]);
 
   useEffect(() => {
@@ -31,19 +32,6 @@ const CategoriesScreen = () => {
     onAddCategory(newCategory);
     setLocalCategories(prev => [...prev, newCategory]);
   };
-
-  const renderCategory = ({ item: category }: { item: CategoryModel }) => (
-    <View style={styles.categoryCard}>
-      <View style={styles.categoryIconContainer}>
-        <Image
-          source={{ uri: category.imageUrl }}
-          style={styles.categoryIcon}
-          resizeMode="contain"
-        />
-      </View>
-      <Typography customStyle={styles.categoryName} value={category.name} />
-    </View>
-  );
 
   return (
     <View style={styles.container}>
@@ -64,13 +52,12 @@ const CategoriesScreen = () => {
       </HeroBackground>
 
       <View style={styles.body}>
-        <FlatList
-          data={localCategories}
-          renderItem={renderCategory}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={2}
-          columnWrapperStyle={styles.categoriesRow}
-          contentContainerStyle={styles.categoriesContainer}
+        <CategoriesSlider 
+          categories={localCategories}
+          expenses={expenses}
+          onDeleteExpense={(id) => {
+            // Handle expense deletion if needed
+          }}
         />
 
         <TouchableOpacity 
