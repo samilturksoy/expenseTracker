@@ -9,7 +9,8 @@ const RootStack = createNativeStackNavigator({
     AddCategories: screens.AddCategories,
     AddExpense: screens.AddExpense,
     ExpenseDetail: screens.ExpenseDetail,
-    Categories : screens.Categories
+    Categories : screens.Categories,
+    CategoryExpenseList:screens.CategoryExpenseList,
   },
   screenOptions: {
     headerShown: false
