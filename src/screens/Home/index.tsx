@@ -14,7 +14,7 @@ import expensesData from '../../shared/constans/expenses.json';
 import categoriesData from '../../shared/constans/categories.json';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -33,12 +33,21 @@ const HomeScreen = () => {
     setExpenses(prevExpenses => [newExpense, ...prevExpenses]);
   };
 
-  const handleDeleteExpense = (id: number) => {
+  const handleDeleteExpense = useCallback((id: number) => {
     setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
-  };
+  }, []);
 
   const handleAddCategory = (newCategory: CategoryModel) => {
     setCategories(prevCategories => [...prevCategories, newCategory]);
+  };
+
+  const handleExpensePress = (expense: ExpenseModel) => {
+    console.log('Categories being passed:', categories);
+    navigation.navigate('ExpenseDetail', {
+      expense,
+      onDeleteExpense: handleDeleteExpense,
+      categories: categories
+    });
   };
 
   return (

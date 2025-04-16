@@ -7,6 +7,28 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  emptyContainer: {
+    backgroundColor: color.neutral.white,
+    borderRadius: normalize(12),
+    padding: normalize(16),
+    marginVertical: normalize(8),
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  emptyText: {
+    fontSize: normalize(14),
+    fontFamily: FONT.MEDIUM,
+    color: color.neutral.darkGray,
+    textAlign: 'center'
+  },
   expenseItem: {
     flexDirection: 'row',
     alignItems: 'center',

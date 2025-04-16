@@ -118,5 +118,27 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     fontSize: normalize(16),
     fontFamily: FONT.BOLD,
     color: isDarkMode ? color.neutral.white : color.neutral.black
+  },
+  emptyContainer: {
+    backgroundColor: isDarkMode ? color.neutral.gray : color.neutral.white,
+    borderRadius: normalize(12),
+    padding: normalize(16),
+    marginVertical: normalize(8),
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  emptyText: {
+    fontSize: normalize(14),
+    fontFamily: FONT.MEDIUM,
+    color: isDarkMode ? color.neutral.lightGray : color.neutral.darkGray,
+    textAlign: 'center'
   }
 }); 

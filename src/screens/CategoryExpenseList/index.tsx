@@ -8,6 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { Expense } from '../../shared/types/expense';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 type RouteProp = NativeStackScreenProps<RootStackParamList, 'CategoryExpenseList'>['route'];
@@ -17,12 +18,16 @@ const CategoryExpenseList = () => {
   const styles = createStyles(isDarkMode);
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp>();
-  const { category, expenses, onDeleteExpense } = route.params;
+  const { category, expenses, onDeleteExpense, categories } = route.params;
 
   const totalAmount = expenses.reduce((sum, expense) => sum + expense.amount, 0);
 
-  const handleExpensePress = (expense: any) => {
-    navigation.navigate('ExpenseDetail', { expense, onDeleteExpense });
+  const handleExpensePress = (expense: Expense) => {
+    navigation.navigate('ExpenseDetail', { 
+      expense, 
+      onDeleteExpense,
+      categories
+    });
   };
 
   return (
@@ -62,26 +67,35 @@ const CategoryExpenseList = () => {
 
       <View style={styles.body}>
         <Typography customStyle={styles.sectionTitle} value="Harcamalar" />
-        <FlatList
-          data={expenses}
-          renderItem={({ item }) => (
-            <TouchableOpacity 
-              style={styles.expenseItem}
-              onPress={() => handleExpensePress(item)}
-            >
-              <View>
-                <Typography customStyle={styles.expenseTitle} value={item.title} />
-                <Typography customStyle={styles.expenseDate} value={item.date} />
-              </View>
-              <Typography 
-                customStyle={styles.expenseAmount} 
-                value={`${item.amount.toLocaleString('tr-TR')} TL`} 
-              />
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-        />
+        {expenses.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Typography 
+              customStyle={styles.emptyText} 
+              value="Bu kategoride henüz harcama bulunmuyor" 
+            />
+          </View>
+        ) : (
+          <FlatList
+            data={expenses}
+            renderItem={({ item }) => (
+              <TouchableOpacity 
+                style={styles.expenseItem}
+                onPress={() => handleExpensePress(item)}
+              >
+                <View>
+                  <Typography customStyle={styles.expenseTitle} value={item.title} />
+                  <Typography customStyle={styles.expenseDate} value={item.date} />
+                </View>
+                <Typography 
+                  customStyle={styles.expenseAmount} 
+                  value={`${item.amount.toLocaleString('tr-TR')} TL`} 
+                />
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       </View>
     </View>
   );

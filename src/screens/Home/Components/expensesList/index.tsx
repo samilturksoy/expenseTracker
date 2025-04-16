@@ -7,6 +7,7 @@ import { View, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
+import Typography from '../../../../shared/components/Typography';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -20,13 +21,24 @@ export default function ExpensesList({ expenses, categories, onDeleteExpense }: 
   const navigation = useNavigation<NavigationProp>();
   const hasExpenses = expenses.length > 0;
 
-  if (!hasExpenses) {
-    return null;
-  }
-
   const handleExpensePress = (expense: Expense) => {
-    navigation.navigate('ExpenseDetail', { expense, onDeleteExpense });
+    navigation.navigate('ExpenseDetail', { 
+      expense, 
+      onDeleteExpense,
+      categories 
+    });
   };
+
+  if (!hasExpenses) {
+    return (
+      <View style={styles.emptyContainer}>
+        <Typography 
+          customStyle={styles.emptyText} 
+          value="Henüz harcama eklemediniz" 
+        />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

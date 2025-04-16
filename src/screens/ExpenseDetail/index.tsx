@@ -3,7 +3,6 @@ import Typography from '../../shared/components/Typography';
 import useDarkMode from '../../shared/hooks/useDarkMode';
 import HeroBackground from '../../shared/components/heroBackground';
 import color from '../../shared/constans/colors';
-import categoriesData from '../../shared/constans/categories.json';
 import { RootStackParamList } from '../../shared/types/navigation';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import React from 'react';
@@ -18,12 +17,15 @@ const ExpenseDetailScreen = () => {
   const styles = createStyles(isDarkMode);
   const route = useRoute<RouteProp>();
   const navigation = useNavigation<NavigationProp>();
-  const { expense, onDeleteExpense } = route.params;
+  const { expense, onDeleteExpense, categories } = route.params;
+
+  console.log('Route Params:', route.params);
+  console.log('Categories:', categories);
 
   // Kategori ikonunu bul
-  const categoryIcon = categoriesData.categories.find(
+  const category = categories?.find(
     cat => cat.name === expense.category
-  )?.imageUrl;
+  );
 
   const handleDelete = () => {
     Alert.alert(
@@ -43,6 +45,38 @@ const ExpenseDetailScreen = () => {
           style: 'destructive'
         }
       ]
+    );
+  };
+
+  const renderCategoryContent = () => {
+    if (!category) {
+      return (
+        <View style={styles.categoryContainer}>
+          <View style={styles.categoryInfo}>
+            <Typography customStyle={styles.categoryLabel} value="Kategori" />
+            <Typography 
+              customStyle={[styles.categoryText, styles.missingText]} 
+              value="Kategori bulunamadı" 
+            />
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.categoryContainer}>
+        <View style={styles.categoryIconContainer}>
+          <Image
+            source={{ uri: category.imageUrl }}
+            style={styles.categoryIcon}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={styles.categoryInfo}>
+          <Typography customStyle={styles.categoryLabel} value="Kategori" />
+          <Typography customStyle={styles.categoryText} value={category.name} />
+        </View>
+      </View>
     );
   };
 
@@ -75,21 +109,7 @@ const ExpenseDetailScreen = () => {
 
         <View style={styles.body}>
           <View style={styles.card}>
-            <View style={styles.categoryContainer}>
-              {categoryIcon && (
-                <View style={styles.categoryIconContainer}>
-                  <Image
-                    source={{ uri: categoryIcon }}
-                    style={styles.categoryIcon}
-                    resizeMode="contain"
-                  />
-                </View>
-              )}
-              <View style={styles.categoryInfo}>
-                <Typography customStyle={styles.categoryLabel} value="Kategori" />
-                <Typography customStyle={styles.categoryText} value={expense.category} />
-              </View>
-            </View>
+            {renderCategoryContent()}
 
             <View style={styles.infoSection}>
               <Typography customStyle={styles.infoLabel} value="Başlık" />

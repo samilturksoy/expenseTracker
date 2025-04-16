@@ -1,6 +1,6 @@
 {
   "categories": [
-    {
+    /* {
       "id": 1,
       "name": "Yemek",
       "imageUrl": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png"
@@ -89,6 +89,6 @@
       "id": 18,
       "name": "Diğer",
       "imageUrl": "https://cdn-icons-png.flaticon.com/512/1828/1828919.png"
-    }
+    } */
   ]
 }

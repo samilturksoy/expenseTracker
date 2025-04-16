@@ -1,6 +1,6 @@
 {
   "expenses": [
-    {
+    /* {
       "id": 101,
       "title": "Restoran",
       "amount": 150,
@@ -120,5 +120,6 @@
       "category": "Fatura",
       "details": "Mart ayı internet faturası"
     }
-  ]
+ */  
+]
 }

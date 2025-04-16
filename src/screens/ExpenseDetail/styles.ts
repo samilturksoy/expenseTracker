@@ -110,6 +110,11 @@ export const createStyles = (isDarkMode: boolean) => StyleSheet.create({
     fontFamily: FONT.BOLD,
     color: isDarkMode ? color.neutral.white : color.neutral.black
   },
+  missingText: {
+    color: color.secondary.red,
+    fontFamily: FONT.MEDIUM,
+    fontSize: normalize(16)
+  },
   infoSection: {
     marginBottom: normalize(24)
   },

@@ -30,7 +30,14 @@ const CategoriesSlider: React.FC<CategoriesSliderProps> = ({
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   if (!categories || categories.length === 0) {
-    return null;
+    return (
+      <View style={styles.emptyContainer}>
+        <Typography 
+          customStyle={styles.emptyText} 
+          value="Henüz kategori eklemediniz" 
+        />
+      </View>
+    );
   }
 
   const handleCategoryPress = (category: Category) => {
@@ -42,7 +49,8 @@ const CategoriesSlider: React.FC<CategoriesSliderProps> = ({
       navigation.navigate('CategoryExpenseList', {
         category,
         expenses: categoryExpenses,
-        onDeleteExpense
+        onDeleteExpense,
+        categories
       });
     }
   };

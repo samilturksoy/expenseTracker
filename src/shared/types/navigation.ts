@@ -10,7 +10,11 @@ export type RootStackParamList = {
     onAddExpense: (expense: ExpenseModel) => void;
     categories: CategoryModel[];
   };
-  ExpenseDetail: { expense: ExpenseModel; onDeleteExpense: (id: number) => void };
+  ExpenseDetail: { 
+    expense: ExpenseModel; 
+    onDeleteExpense: (id: number) => void;
+    categories: CategoryModel[];
+  };
   Categories: { 
     categories: CategoryModel[];
     onAddCategory: (category: CategoryModel) => void;
@@ -20,6 +24,7 @@ export type RootStackParamList = {
   CategoryExpenseList: { 
     category: CategoryModel; 
     expenses: ExpenseModel[]; 
-    onDeleteExpense: (id: number) => void;
+    onDeleteExpense?: (id: number) => void;
+    categories: CategoryModel[];
   };
 };
